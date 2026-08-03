@@ -1,11 +1,13 @@
 "use client";
 
+import styles from "../../style/myschedule.module.css"
 import { useEffect, useState } from "react";
 import { supabase } from '../../component/auth/supabaseClient';
 
 export default function Page() {
     const [user,setUser] = useState<any>(null);
     const [events,setEvents] = useState<any[]>([]);
+    const [openId, setOpenId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -32,19 +34,22 @@ export default function Page() {
 
   console.log(user);
   return (
-    <div>
-      <h1>Events</h1>
-      <ul>
-        {events?.map((event) => (
+    <div className={styles.scheduleBox}>
+      <h1 className={styles.title}>내 일정</h1>
+      <ul className={styles.list}>
+        {events?.map((event) => {
+          const isDescription = openId === event.id;
+        return (
           user.data.user?.email === event.user_email && (
-          <li key={event.id}>
-            <h2>{event.title}</h2>
-            <p>{event.description}</p>
-            <p>Date: {event.date}</p>
-            <p>User: {event.user_email}</p>
+          <li key={event.id} className={styles.scheduleList} onClick={() => setOpenId(isDescription ? null : event.id)}>
+            <div className={styles.scheduleTitleBox}>
+              <h2>{event.title}</h2>
+              <p>{event.date.slice(0,10)}</p>
+            </div>
+            <p className={`${styles.description} ${isDescription ? styles.show : ""}`}>{event.description}</p>
           </li>
           )
-        ))}
+        )})}
       </ul>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from "react";
 import Calendar from "../component/calendar/calendar";
 
 export default function Page() {
