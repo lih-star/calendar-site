@@ -21,7 +21,6 @@ export default function Navigation() {
       {/* 왼쪽 메뉴 */}
       <nav>
         <Link href="/">Home</Link>
-        <Link href="/projects">Projects</Link>
       </nav>
 
       {/* 오른쪽 메뉴 */}

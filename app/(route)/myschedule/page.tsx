@@ -66,9 +66,11 @@ export default function Page() {
                 <h2>{event.title}</h2>
                 <p>{event.date.slice(0,10)}</p>
               </div>
-              <p className={`${styles.description} ${isDescription ? styles.show : ""}`}>{event.description}</p>
+              <div className={`${styles.scheduleDescriptionBox} ${isDescription ? styles.show : ""}`}>
+                <p className={`${styles.description} ${isDescription ? styles.show : ""}`}>{event.description}</p>
+                <button className={styles.deleteButton} onClick={() => deleteEvent(event.id)}>삭제</button>
+              </div>
             </li>
-            <button className={styles.deleteButton} onClick={() => deleteEvent(event.id)}>X</button>
           </div>
           )
         )})}

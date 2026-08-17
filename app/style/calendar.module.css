@@ -23,9 +23,10 @@
   gap: 1;
   background-color: rgba(0, 0, 0, 0.5);
   color: #f0f0f0;
-  margin: 15%;
+  margin: 5%;
   margin-top: 0;
   border: 1px solid #f0f0f0;
+  width: 90%;
 }
 
 /* 요일 스타일 */
