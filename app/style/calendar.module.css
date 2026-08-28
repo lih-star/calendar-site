@@ -51,6 +51,10 @@
   cursor: pointer;
 }
 
+.day.past:hover {
+  cursor: default;
+}
+
 /* 오늘 날짜 스타일 */
 .today {
   composes : day; /* day 스타일을 상속받음 */

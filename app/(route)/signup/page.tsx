@@ -43,8 +43,8 @@ export default function Page() {
         <button className={styles.button} type="submit">
           로그인
         </button>
-        <GithubButton />
       </form>
+      <GithubButton/>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   )

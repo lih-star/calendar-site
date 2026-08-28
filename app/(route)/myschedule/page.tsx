@@ -4,6 +4,7 @@ import styles from "../../style/myschedule.module.css"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from '../../component/auth/supabaseClient';
+import { getUser } from '../../component/auth/auth'
 
 export default function Page() {
     const [user,setUser] = useState<any>(null);
@@ -31,6 +32,20 @@ export default function Page() {
     };
 
   useEffect(() => {
+    // 이전 날짜 데이터 삭제
+    const deleteOldRows = async (email: string) => {
+      const { error } = await supabase
+        .from('events')
+        .delete()
+        .lt('date', new Date().toISOString().split('T')[0]) // 오늘 날짜보다 이전
+        .eq('user_email', email);
+
+      if (error) {
+        console.error('삭제 오류:', error)
+      }
+    }
+
+    // 이벤트 데이터 가져오기
     const fetchEvents = async () => {
       const { data: data, error } = await supabase
       .from('events')
@@ -45,13 +60,16 @@ export default function Page() {
       }
     }
 
+    // 사용자 정보 가져오기
     const fetchUser = async () => {
-      const user = await supabase.auth.getUser();
+      const user = await getUser();
       setUser(user);
+      deleteOldRows(user?.email || '');
     }
-    fetchEvents();
     fetchUser();
+    fetchEvents();
   }, []);
+
   return (
     <div className={styles.scheduleBox}>
       <h1 className={styles.title}>내 일정</h1>
@@ -59,7 +77,7 @@ export default function Page() {
         {events?.map((event) => {
           const isDescription = openId === event.id;
         return (
-          user.data.user?.email === event.user_email && (
+          user?.email === event.user_email && (
           <div key={event.id} className={styles.scheduleContainer}>
             <li key={event.id} className={styles.scheduleList} onClick={() => setOpenId(isDescription ? null : event.id)}>
               <div className={styles.scheduleTitleBox}>

@@ -73,9 +73,10 @@ export default function Calendar ({ year, month, today} : CalendarProps) {
         ))}
         {cells.map((date, idx) => (
           date === null ? <div key={idx}></div> : 
-          <div onClick = {() => writeCalendar(currentYear, currentMonth, date)} key={idx} className={date === today &&
-                                    currentMonth === new Date().getMonth() &&
-                                    currentYear === new Date().getFullYear() ? styles.today : styles.day}>
+          <div onClick = {currentMonth > new Date().getMonth() && currentYear >= new Date().getFullYear() ||
+                           currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear() && date >= today ? () => writeCalendar(currentYear, currentMonth, date) : undefined}
+                          key={idx} className={currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear() && date === today ? styles.today : 
+                                                currentMonth <= new Date().getMonth() && currentYear <= new Date().getFullYear() && date < today ? `${styles.day} ${styles.past}` : styles.day}>
             {date ?? ""} 
           </div>
         ))}

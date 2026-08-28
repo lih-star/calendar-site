@@ -18,7 +18,7 @@ const GithubBtn = styled.button`
 `;
 
 export default function GithubButton() {
-  const handleLogin = () => {
+  const handleLogin = async () => {
     signInUpWithGitHub();
   };
 
