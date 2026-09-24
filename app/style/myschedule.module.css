@@ -1,3 +1,4 @@
+/* 내 일정 페이지 전체 스타일 */
 .scheduleBox {
     text-align: center;
     flex-direction: column;
@@ -16,11 +17,13 @@
     list-style: none;
 }
 
+/* 일정 리스트 전체 스타일 */
 .scheduleContainer {
     display: flex;
     justify-content: space-between;
 }
 
+/* 일정 리스트 스타일 */
 .scheduleList {
     cursor: pointer;
     margin-bottom: 10px;
@@ -30,14 +33,7 @@
     box-shadow: 0 0 20px #a855f7, 0 0 40px #3b82f6;
 }
 
-.description {
-    margin-top: 5px;
-    margin-left: 5px;
-    text-align: left;
-    font-size: 18px;
-    width: 500px;
-}
-
+/* 일정 제목, 날짜 표기 박스 스타일 */
 .scheduleTitleBox {
     display: flex;
     height: 35px;
@@ -50,6 +46,30 @@
     box-sizing: border-box;
 }
 
+/* 일정 내용 박스 스타일 */
+.scheduleDescriptionBox {
+    display: flex;
+    justify-content: space-between;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.3s ease;
+}
+.scheduleDescriptionBox.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+/* 일정 내용 스타일 */
+.description {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-align: left;
+    font-size: 18px;
+    width: 500px;
+}
+
+/* 일정 삭제 버튼 스타일 */
 .deleteButton {
     align-self: flex-end;
     width: 40px;
@@ -63,23 +83,10 @@
     box-shadow: 0 0 5px #ff3399, 0 0 10px #ff66cc;
 }
 
-.scheduleDescriptionBox {
-    display: flex;
-    justify-content: space-between;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.6s ease, opacity 0.3s ease;
-}
-
-.scheduleDescriptionBox.show {
-    max-height: 200px;
-    opacity: 1;
-}
-
+/* 반응형 스타일 */
 @media (max-width: 600px) {
   .scheduleTitleBox {
-    width: 300px;   /* 한 줄에 하나씩 */
+    width: 300px;
     font-size: 14px;
     padding: 10px;
   }

@@ -1,3 +1,5 @@
+// 캘린더 컴포넌트
+
 "use client";
 import { useEffect, useState } from "react";
 import styles from "../../style/calendar.module.css";
@@ -71,8 +73,8 @@ export default function Calendar ({ year, month, today} : CalendarProps) {
         {daysOfWeek.map((day) => (
           <div key={day} className={styles.header}>{day}</div>
         ))}
-        {cells.map((date, idx) => (
-          date === null ? <div key={idx}></div> : 
+        {cells.map((date, idx) => ( 
+          date === null ? <div key={idx}></div> : // 조건 : 선택한 달이 실제달보다 크거나 선택한 년도가 실제년도와 같거나 크면 -> onclick 활성화, 클릭 가능 style 적용
           <div onClick = {currentMonth > new Date().getMonth() && currentYear >= new Date().getFullYear() ||
                            currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear() && date >= today ? () => writeCalendar(currentYear, currentMonth, date) : undefined}
                           key={idx} className={currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear() && date === today ? styles.today : 

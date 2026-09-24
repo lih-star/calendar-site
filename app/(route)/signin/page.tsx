@@ -1,3 +1,5 @@
+// 회원가입 페이지
+
 'use client'
 
 import { useState } from 'react'
@@ -11,6 +13,7 @@ export default function Page() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
+  // 회원가입 처리
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     try {

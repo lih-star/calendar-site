@@ -33,6 +33,7 @@ export async function getSession() {
   return data.session
 }
 
+// 현재 로그인 유저 가져오기
 export async function getUser() {
   const { data, error } = await supabase.auth.getUser()
   if (error) throw error

@@ -1,3 +1,5 @@
+// 로그인 페이지
+
 'use client'
 import { useRouter} from 'next/navigation'
 import { useState } from 'react'
@@ -11,6 +13,7 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter();
 
+  // 로그인 처리
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     try {

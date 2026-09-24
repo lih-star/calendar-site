@@ -1,3 +1,5 @@
+//일정 작성 페이지
+
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -8,7 +10,7 @@ import { supabase } from "../../../component/auth/supabaseClient";
 import styles from "../../../style/events.module.css";
 import { useEffect, useState } from "react";
 
-// ✅ Zod 스키마 정의
+// Zod 스키마 정의
 const eventSchema = z.object({
   title: z.string().min(1, "제목은 필수입니다"),
   description: z.string().optional(),
@@ -32,6 +34,7 @@ export default function Page() {
     resolver: zodResolver(eventSchema),
   });
 
+  // 로그인 상태 확인 후 일정 작성
   const onSubmit = async (data: EventForm) => {
     if(user?.error) {
         alert("로그인이 필요한 서비스입니다.");

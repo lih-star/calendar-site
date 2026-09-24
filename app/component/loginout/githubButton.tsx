@@ -1,3 +1,5 @@
+// 깃허브 로그인 버튼
+
 import { signInUpWithGitHub } from "../auth/auth";
 import styled from "styled-components";
 

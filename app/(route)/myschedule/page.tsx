@@ -1,3 +1,4 @@
+// 내 스케쥴 페이지
 "use client";
 
 import styles from "../../style/myschedule.module.css"
@@ -12,6 +13,7 @@ export default function Page() {
     const [openId, setOpenId] = useState<number | null>(null);
     const router = useRouter();
 
+    // 내 일정 삭제
     async function deleteEvent(id: number) {
       const confirmed = window.confirm("정말 삭제하시겠습니까?");
       if (!confirmed) {
@@ -31,6 +33,7 @@ export default function Page() {
       }
     };
 
+    // 작성페이지 입장시 기간이 지난 일정 삭제 후 내 일정 가져오기
   useEffect(() => {
     // 이전 날짜 데이터 삭제
     const deleteOldRows = async (email: string) => {

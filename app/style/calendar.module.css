@@ -45,12 +45,12 @@
   color: #f0f0f0;
   outline: 1px solid #f0f0f0;
 }
-
+/* 날짜 hover 스타일 */
 .day:hover {
   background-color: #5a5a5a;
   cursor: pointer;
 }
-
+/* 지난 날짜 hover 스타일 */
 .day.past:hover {
   cursor: default;
 }

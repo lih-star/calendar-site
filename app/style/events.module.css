@@ -1,3 +1,4 @@
+/* 작성 페이지 전체 스타일 */
 .eventsBox {
     display: flex;
     align-items: center;
@@ -5,6 +6,7 @@
     margin-top: 20px;
 }
 
+/* 작성 페이지 폼 스타일 */
 .formBox {
     display: flex;
     flex-direction: column;
@@ -12,16 +14,15 @@
     margin-top: 20px;
 }
 
+/* 폼 일정 이름 스타일 */
 .formTitle {
     display: flex;
     font-size: 34px;
     margin-bottom: 10px;
 }
-
 .formTitle label {
     display: flex;
 }
-
 .formTitle input {
     display: flex;
     justify-content: flex-end;
@@ -31,17 +32,16 @@
     border-radius: 4px;
 }
 
+/* 폼 일정 내용 스타일 */
 .formDescription {
     display: flex;
     justify-content: flex-end;
     font-size: 34px;
     margin-bottom: 10px;
 }
-
 .formDescription label {
     display: flex;
 }
-
 .formDescription textarea {
     width: 40vw;
     min-width: 40vw;
@@ -52,11 +52,13 @@
     border-radius: 4px;
 }
 
+/* 저장하기 버튼 스타일 */
 .formButton {
     height: 40px;
     margin-top: 10px;
 }
 
+/* 에러 메시지 스타일 */
 .errorMessage {
     color: red;
     text-align: center;
