@@ -69,6 +69,20 @@
     width: 500px;
 }
 
+/* 일정 수정 버튼 스타일 */
+.editButton {
+    align-self: flex-end;
+    width: 40px;
+    height: 30px;
+    margin: 5px;
+    border: solid 1px #000;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 5px #bebebe, 0 0 10px #6d6d6d;
+}
+
 /* 일정 삭제 버튼 스타일 */
 .deleteButton {
     align-self: flex-end;

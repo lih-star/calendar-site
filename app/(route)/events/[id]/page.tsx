@@ -91,7 +91,3 @@ export default function Page() {
     </div>
   )
 }
-
-function createServerComponentClient(arg0: { cookies: any; }) {
-  throw new Error("Function not implemented.");
-}

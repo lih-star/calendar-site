@@ -89,6 +89,7 @@ export default function Page() {
               </div>
               <div className={`${styles.scheduleDescriptionBox} ${isDescription ? styles.show : ""}`}>
                 <p className={`${styles.description} ${isDescription ? styles.show : ""}`}>{event.description}</p>
+                <button className={styles.editButton} onClick={() => router.push(`/edit/${event.id}`)}>수정</button>
                 <button className={styles.deleteButton} onClick={() => deleteEvent(event.id)}>삭제</button>
               </div>
             </li>
