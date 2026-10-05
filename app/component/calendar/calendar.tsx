@@ -1,10 +1,13 @@
 // 캘린더 컴포넌트
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "../../style/calendar.module.css";
 
 export default function Calendar () {
-  const [today, setToday] = useState<number | null>(null);
+  const router = useRouter();
+  type Today = { y: number; m: number; d: number };
+  const [today, setToday] = useState<Today | null>(null);
   const [currentYear, setYear] = useState<number | null>(null);
   const [currentMonth, setMonth] = useState<number | null>(null);
   const [cells, setCells] = useState<(number | null)[]>([]);
@@ -37,28 +40,27 @@ export default function Calendar () {
   };
 
   // 날짜 클릭 시 캘린더 작성
-  const writeCalendar = (yr: number, mo: number, dat: number | null) => {
-    if (dat === null) return;
-    location.href = `/events/${yr}-${mo + 1}-${dat}`;
+  const writeCalendar = (yr: number, mo: number, dat: number) => {
+    router.push(`/events/${yr}-${mo + 1}-${dat}`);
   };
 
   // 선택한 날짜가 오늘 인지 확인
-  const isToday = (yr: number, mo: number, dat: number | null) => {
-    if (dat === null) return false;
-    return yr === new Date().getFullYear() && mo === new Date().getMonth() && dat === new Date().getDate();
+  const isToday = (yr: number, mo: number, dat: number) => {
+    if (today === null) return false;
+    return yr === today.y && mo === today.m && dat === today.d;
   };
 
   // 선택한 날짜가 오늘 이후인지 확인
-  const isPast = (yr: number, mo: number, dat: number | null) => {
-    if (dat === null) return false;
-    return yr > new Date().getFullYear() ||
-          (yr === new Date().getFullYear() && mo > new Date().getMonth()) || 
-          (yr === new Date().getFullYear() && mo === new Date().getMonth() && dat > new Date().getDate());
+  const isTodayOrAfter = (yr: number, mo: number, dat: number) => {
+    if (today === null) return false;
+    return yr > today.y ||
+          (yr === today.y && mo > today.m) || 
+          (yr === today.y && mo === today.m && dat >= today.d);
   };
 
   useEffect(() => {
     const now = new Date();
-    setToday(now.getDate());
+    setToday({ y: now.getFullYear(), m: now.getMonth(), d: now.getDate() });
     setYear(now.getFullYear());
     setMonth(now.getMonth());
   }, []);
@@ -100,11 +102,11 @@ export default function Calendar () {
           <div key={day} className={styles.header}>{day}</div>
         ))}
         {cells.map((date, idx) => ( 
-          date === null ? <div key={idx}></div> : // 조건 : 선택한 달이 실제달보다 크거나 선택한 년도가 실제년도와 같거나 크면 -> onclick 활성화, 클릭 가능 style 적용
-          <div onClick = {isPast(currentYear, currentMonth, date+1) ? () => writeCalendar(currentYear, currentMonth, date) : undefined}
+          date === null ? <div key={idx}></div> :
+          <div onClick = {isTodayOrAfter(currentYear, currentMonth, date) ? () => writeCalendar(currentYear, currentMonth, date) : undefined}
                           key={idx} className={isToday(currentYear, currentMonth, date) ? styles.today : 
-                                                isPast(currentYear, currentMonth, date) ? styles.day : `${styles.day} ${styles.past}`}>
-            {date ?? ""} 
+                                                isTodayOrAfter(currentYear, currentMonth, date) ? styles.day : `${styles.day} ${styles.past}`}>
+            {date} 
           </div>
         ))}
       </div>
